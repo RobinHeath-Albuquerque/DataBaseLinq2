@@ -29,11 +29,11 @@ namespace DatabaseFirstLINQ
             //ProblemNine();
             //ProblemTen();
            // ProblemEleven();
-            ProblemTwelve();
+           //ProblemTwelve();
             //ProblemThirteen();
             //ProblemFourteen();
             //ProblemFifteen();
-            //ProblemSixteen();
+            ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
             //ProblemNineteen();
@@ -189,9 +189,9 @@ namespace DatabaseFirstLINQ
             // Create a new Product object and add that product to the Products table using LINQ.
             Product newProduct = new Product()
             {
-                Name = "Coleman Sundome Tent",
-                Description = "Two Person Camping Tent",
-                Price = 49
+                Name = "Speedo Bathing Suit",
+                Description = "Womens Bathing Suit",
+                Price = 39
             };
             _context.Products.Add(newProduct);
             _context.SaveChanges();
@@ -234,10 +234,13 @@ namespace DatabaseFirstLINQ
         private void ProblemSixteen()
         {
             // Update the price of the product you created to something different using LINQ.
-            var product = _context.Products.Where(p => p.Name == "Coleman Sundome Tent").SingleOrDefault();
-            product.Price = 69;
+            var product = _context.Products.Where(p => p.Id == 9).SingleOrDefault();
+            product.Name = "Speedo Bathing Suit";
+            product.Description = "Womens Bathing Suit";
+            product.Price = 39;
             _context.Products.Update(product);
             _context.SaveChanges();
+
 
             
 
