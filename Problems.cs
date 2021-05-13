@@ -27,6 +27,9 @@ namespace DatabaseFirstLINQ
             //ProblemSeven();
             //ProblemEight();
             //ProblemNine();
+            ProblemTen();
+            //ProblemEleven();
+            //ProblemTwelve();
             //ProblemTen();
            // ProblemEleven();
            //ProblemTwelve();
@@ -151,13 +154,10 @@ namespace DatabaseFirstLINQ
             //and returns the sum of all of the products prices.
             // HINT: End of query will be: .Select(sc => sc.Product.Price).Sum();
             // Then print the total of the shopping cart to the console.
+
             var products = _context.ShoppingCarts.Include(sc => sc.User).Include(sc => sc.Product).Where(sc => sc.User.Email == "oda@gmail.com").ToList();
             Console.WriteLine(products.Select(sc => sc.Product.Price).Sum());
-            //decimal totalPrice = 0;
-            //foreach(ShoppingCart product in products)
-            //{
-            //    totalPrice += product.Product.Price;
-            //}
+ 
 
         }
 
@@ -165,7 +165,17 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of users who have the role of "Employee".
             // Then print the user's email as well as the product's name, price, and quantity to the console.
+            var customerUsers = _context.UserRoles.Include(ur => ur.Role).Include(ur => ur.User).Where(ur => ur.Role.RoleName == "Employee").ToList();
+            
+            foreach(UserRole customer in customerUsers)
+            {
+                var thingy = _context.ShoppingCarts.Include(sc => sc.User).Include(sc => sc.Product).Where(sc => sc.User.Id == customer.UserId).ToList();
+                Console.WriteLine(thingy[0].User.Email + " " + thingy[0].Product.Name + " " + thingy[0].Product.Price + " " + thingy[0].Quantity);
+            }
+            
+            
 
+          
         }
 
         // <><><><><><><><> CUD (Create, Update, Delete) Actions <><><><><><><><><>
