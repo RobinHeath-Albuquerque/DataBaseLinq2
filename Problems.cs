@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using DatabaseFirstLINQ.Models;
@@ -22,11 +22,11 @@ namespace DatabaseFirstLINQ
             //ProblemTwo();
             //ProblemThree();
             //ProblemFour();
-            ProblemFive();
+            //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
             //ProblemEight();
-            //ProblemNine();
+            ProblemNine();
             //ProblemTen();
             //ProblemEleven();
             //ProblemTwelve();
@@ -136,14 +136,28 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
+            var products = _context.ShoppingCarts.Include(sc => sc.User).Include(sc => sc.Product).Where(sc => sc.User.Email == "afton@gmail.com").ToList();
+            foreach (ShoppingCart product in products)
+            {
+                Console.WriteLine("Name:" + product.Product.Name + "Price" + product.Product.Price + "Quantity" + product.Quantity);
+            }
+            
 
         }
 
         private void ProblemNine()
         {
-            // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "oda@gmail.com" and returns the sum of all of the products prices.
+            // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "oda@gmail.com" 
+            //and returns the sum of all of the products prices.
             // HINT: End of query will be: .Select(sc => sc.Product.Price).Sum();
             // Then print the total of the shopping cart to the console.
+            var products = _context.ShoppingCarts.Include(sc => sc.User).Include(sc => sc.Product).Where(sc => sc.User.Email == "oda@gmail.com").ToList();
+            Console.WriteLine(products.Select(sc => sc.Product.Price).Sum());
+            //decimal totalPrice = 0;
+            //foreach(ShoppingCart product in products)
+            //{
+            //    totalPrice += product.Product.Price;
+            //}
 
         }
 
