@@ -27,16 +27,15 @@ namespace DatabaseFirstLINQ
             //ProblemSeven();
             //ProblemEight();
             //ProblemNine();
-            ProblemTen();
-            //ProblemEleven();
+            //ProblemTen();
+           //ProblemEleven();
             //ProblemTwelve();
             //ProblemTen();
            // ProblemEleven();
            //ProblemTwelve();
-            //ProblemThirteen();
-            //ProblemFourteen();
+            ProblemFourteen();
             //ProblemFifteen();
-            ProblemSixteen();
+            //ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
             //ProblemNineteen();
@@ -225,7 +224,11 @@ namespace DatabaseFirstLINQ
         private void ProblemFourteen()
         {
             // Add the product you create to the user we created in the ShoppingCart junction table using LINQ.
-            var productId = _context.Products.Where(p => p.Name == "Coleman Sundome Tent").Select(p => p.Id).SingleOrDefault();
+            //var productId = _context.Products.Where(p => p.Name == "Coleman Sundome Tent").Select(p => p.Id).SingleOrDefault();
+           // var userId = _context.Users.Where(u => u.Email == "daid@gmail.com").Select(u => u.Id).SingleOrDefault();
+           // var cart = _context.ShoppingCarts.Where(c=> c.Us)
+
+
             
 
         }
@@ -277,7 +280,16 @@ namespace DatabaseFirstLINQ
         private void ProblemEighteen()
         {
             // Delete the role relationship from the user who has the email "oda@gmail.com" using LINQ.
-
+            {
+                // Delete the role relationship from the user who has the email "oda@gmail.com" using LINQ.
+                var role = _context.UserRoles.Include(ur => ur.User).Where(ur => ur.User.Email == "oda@gmail.com").ToList();
+                foreach (UserRole userRoleRelationship in role)
+                {
+                    Console.WriteLine(userRoleRelationship.RoleId);
+                    _context.UserRoles.Remove(userRoleRelationship);
+                }
+                _context.SaveChanges();
+            }
         }
 
         private void ProblemNineteen()
@@ -296,6 +308,13 @@ namespace DatabaseFirstLINQ
         {
             // Delete the user with the email "oda@gmail.com" from the Users table using LINQ.
 
+            
+
+            _context.Users.Remove(_context.Users.Single(u => u.Email == "oda@gmail.com"));
+            _context.SaveChanges();
+
+
+            
         }
 
         // <><><><><><><><> BONUS PROBLEMS <><><><><><><><><>
