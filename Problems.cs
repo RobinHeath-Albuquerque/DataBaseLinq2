@@ -18,7 +18,7 @@ namespace DatabaseFirstLINQ
         }
         public void RunLINQQueries()
         {
-           // ProblemOne();
+            // ProblemOne();
             //ProblemTwo();
             //ProblemThree();
             //ProblemFour();
@@ -28,18 +28,19 @@ namespace DatabaseFirstLINQ
             //ProblemEight();
             //ProblemNine();
             //ProblemTen();
-           //ProblemEleven();
+            //ProblemEleven();
             //ProblemTwelve();
             //ProblemTen();
-           // ProblemEleven();
-           //ProblemTwelve();
-            ProblemFourteen();
+            // ProblemEleven();
+            //ProblemTwelve();
+            //ProblemFourteen();
             //ProblemFifteen();
-           //ProblemSixteen();
+            //ProblemSixteen();
             //ProblemSeventeen();
             //ProblemEighteen();
             //ProblemNineteen();
             //ProblemTwenty();
+            BonusTwo();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -328,14 +329,31 @@ namespace DatabaseFirstLINQ
             // Prompt the user to enter in an email and password through the console.
             // Take the email and password and check if the there is a person that matches that combination.
             // Print "Signed In!" to the console if they exists and the values match otherwise print "Invalid Email or Password.".
+
+            Console.WriteLine("Please enter your email");
+            var userEmail = Console.ReadLine();
+            Console.WriteLine("Please enter your passwword");
+            string userPassword = Console.ReadLine();
+            Console.WriteLine($"{userEmail} {userPassword}");
+            var users = _context.Users.Where(u => u.Email == userEmail & u.Password == userPassword).ToList();
+            if (users.Count != 0)
+            {
+                Console.WriteLine("You are logged in");
+
+            }
+            else
+                Console.WriteLine("Invalid Password or Email");
+
         }
 
         private void BonusTwo()
         {
             // Write a query that finds the total of every users shopping cart products using LINQ.
             // Display the total of each users shopping cart as well as the total of the toals to the console.
-        }
 
+            var product = _context.ShoppingCarts.Include(sc => sc.UserId).Include(sc => sc.Product).ToList();
+            Console.WriteLine(product.Select(sc => sc.Product.Price).Sum());
+        }
         // BIG ONE
         private void BonusThree()
         {
